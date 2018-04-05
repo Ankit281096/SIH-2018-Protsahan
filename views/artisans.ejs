@@ -1,0 +1,195 @@
+<html>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+     <title>Protsahan | StateArtisans</title>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+  <style>
+
+	body {
+	background-color:#F1F1F1;
+  font-family: "Lato",sans-serif;
+	}
+
+	.nav-wrapper {
+	background-color:black;
+	height:20px;
+	}
+  .navbar-fixed nav ul li{
+    padding-right: 10px;
+  }
+  .navbar-fixed nav ul li a:hover{
+    background-color: green;
+    transition: 0.8s all;
+  }
+	.card-image {
+   height:250px;
+	}
+
+	</style>
+
+</head>
+
+<body>
+
+   <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper" style="height:90px;">
+        <a href="#!" class="brand-logo" style="padding-top:10px; padding-left:10px;">Protsahan</a>
+        <ul class="right hide-on-med-and-down">
+          <li style="padding-top:13px; padding-right:15px;"><a style="font-size:18px;" href="/dashboard" >Home</a></li>
+          <li style="padding-top:13px;padding-right:15px;"><a style="font-size:18px;" href="/">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+	</div>
+
+	 <div class="row"style="margin-top:40px;">
+	 	<% for(var i=0;i < artisans.length;i++) {  %>
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <%= console.log(artisans[i].profilephoto.substring(6)) %>
+          <img style="height:300px;" src="<%= artisans[i].profilephoto.substring(6) %>">
+        </div>
+        <div class="card-content">
+
+        </div>
+        <div class="card-action">
+          <a href="/dashboard/artisan/profile?id=<%=artisans[i]._id%>" style="text-align:center;"><%=artisans[i].name %></a>|&nbsp;&nbsp;<%=artisans[i].skills[0] %>
+        </div>
+      </div>
+    </div>
+	<% } %>
+  </div>
+  <footer class="page-footer" style="background-color:black; height:90px;">
+
+         <div class="footer-copyright">
+           <div class="container" style="position:relative;left:32%;font-size:24px;font-weight:700;">
+           ©PROTSAHAN
+           </div>
+         </div>
+       </footer>
+
+</body>
+</html>
+
+
+
+
+
+<!-- /**<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/css_artisans/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css_artisans/custom.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+body {
+	background-color: #F1F1F1;
+}
+
+.header-main{
+   width: 100%;
+   height: 13.7vh;
+}
+
+nav {
+   width :100%;
+   height:80px;
+   background-color:rgba(0, 0, 0,0.850);
+   line-height: 50px;
+   position: fixed;
+   z-index: 100;
+
+}
+
+nav ul {
+   float:right;
+   margin-right: 30px;
+}
+nav ul li {
+
+   display: inline-block;
+   transition: 0.8s all;
+	 padding-top:12px;
+}
+nav ul li:hover{
+   background-color: #29a719;
+
+}
+
+nav ul li a {
+   text-decoration: none;
+   padding:30px;
+   color:white;
+}
+
+.fas fa-bell fa-lg:hover{
+   padding-right: 10px;
+}
+
+.footer {
+   height:70px;
+   width:100%;
+   background-color: rgba(0, 0, 0,0.899);
+   color: white;
+   text-align: center;
+   bottom: 0;
+}
+.footer h2 {
+   padding-top: 20px;
+}
+
+</style>
+
+
+</head>
+<body>
+
+	<div class="header-main">
+					<nav>
+							<img src="/images/logo.png" width="200" height="80" >
+							<ul>
+
+									<li><a href="/">Logout</a></li>
+							</ul>
+					</nav>
+			</div>
+
+<div class="container section-ourTeam">
+	<div class="row">
+		<div class="col-md-12 ourTeam-hedding text-center">
+			<h1>Our Team</h1>
+
+		</div>
+	</div>
+	<div class="row">
+		<% for(var i=0;i < artisans.length;i++) {  %>
+		<div class="col-md-4 col-sm-4 col-xs-12">
+			<div class="row section-success ourTeam-box text-center">
+				<div class="col-md-12 section1">
+					<img src="image/girl.png">
+				</div>
+				<div class="col-md-12 section2">
+					<p><a href="/dashboard/artisan/profile?id=<%=artisans[i]._id%>"><%=artisans[i].username %></a></p>
+				</div>
+				<div class="col-md-12 section3">
+					<i class="fa fa-video" aria-hidden="true"></i>
+					<i class="fa fa-image" aria-hidden="true"></i>
+				</div>
+			</div>
+		</div>
+		<% } %>
+	</div>
+</div>
+
+<div class="footer">
+               <span><h2>@PROTSAHAN</h2></span>
+           </div>
+
+</body>
+</html> -->

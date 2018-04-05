@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link href="/css/style_artisan_profile.css" rel="stylesheet">
+    <title>Protsahan | ArtisanProfile</title>
+</head>
+<body>
+    <div class="header-main">
+        <nav>
+            <img src="/images/logo.png" width="200" height="80">
+            <ul>
+
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="profile-card">
+        <div class="header-profile">
+            <img src="<%= artisan.profilephoto.substring(6) %>" alt="">
+        </div>
+        <div class="content">
+
+            <p><%= artisan.name%> | <%= artisan.skills[0]%></p>
+        </div>
+        <div class="footer-profile">
+            <p><%= artisan.username %></p>
+            <p><%= artisan.phone %></p>
+        </div>
+    </div>
+    <hr style="margin-top:600px;">
+    <%if (typeof artisan.videos[0] !== 'undefined') { %>
+    <div class="video-gallery">
+        <video width="600" height="400" controls poster="<%= artisan.videos[0].thumbnail.substring(6)%>">
+            <source src="<%= artisan.videos[0].url.substring(6) %>" type="video/mp4">
+            </video>
+    </div>
+      <%} else {%>
+       <div style="color: red">No videos</div>
+      <% } %>
+    <hr>
+    <div class="card" style="position:relative;width:90%;left:6%;">
+    <% for(var i=0;i < artisan.images.length;i++) {  %>
+    <img src="<%= artisan.images[i].url.substring(6) %>" alt="Avatar" style="width:350px; height: 350px;padding:10px 20px" >
+    <% } %>
+  </div>
+    <div class="footer">
+        <span><h2>@PROTSAHAN</h2></span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<table>
+  dfhkdhfkdhfdkfh
+  <%= console.log(artisans) %>
+<% for(var i=0; i < artisans.length; i++) { %>
+   <tr>
+     <td><a href="/dashboard/artisan/profile?id=<%= artisans[i]._id %>"><%= artisans[i].username %></a></td>
+     <td><%= artisans[i].state %></td>
+   </tr>
+<% } %>
+</table>

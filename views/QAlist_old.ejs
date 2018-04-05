@@ -1,0 +1,9 @@
+<table>
+  dfhkdhfkdhfdkfh
+  <%= console.log(questions) %>
+<% for(var i=0; i < questions.length  && questions[i].answer==null; i++) { %>
+   <tr>
+     <td><a href="/dashboard/artisan/question?id=<%= questions[i]._id %>"><%= questions[i].query %></a></td>
+   </tr>
+<% } %>
+</table>

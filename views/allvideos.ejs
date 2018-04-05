@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link href="/css/style_artisan_profile.css" rel="stylesheet">
+    <title>Protsahan | ArtisanProfile</title>
+</head>
+<body>
+    <div class="header-main">
+        <nav>
+            <img src="/images/logo.png" width="200" height="80">
+            <ul>
+
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="card" style="position:relative;width:90%;left:35%; margin-top:70px;">
+
+     <% for(var i=0;i< artisans.length;i++) {%>
+       <% for(var j=0;j< artisans[i].videos.length;j++) {%>
+         <% if (typeof artisans[i].videos[j] !== 'undefined') { %>
+
+          <video style="width:350px; height: 350px;padding:10px 20px"  controls poster>
+          <source src="<%= artisans[i].videos[j].url.substring(6) %>" type="video/mp4">
+        </video>
+        <form action="/api/artisans/changeverificationvideos" method="post">
+          <input type= "hidden" name="_id" value="<%= artisans[i].videos[j]._id%>" />
+          <input type= "hidden" name="username" value="<%= artisans[i].username%>" />
+          <button style="position:relative;left:14%;" type="submit" value="Add">Approve</button>
+        </form>
+          <hr style="position:relative;left:-33%;">
+
+        <% } %>
+      <% } %>
+    <% } %>
+      </div>
+    <hr style="height:25px;">
+    <div class="card" style="position:relative;width:90%;left:35%; ">
+      <% for(var i=0;i< artisans.length;i++) {%>
+        <% for(var j=0;j< artisans[i].images.length;j++) {%>
+          <% if (typeof artisans[i].images[j] !== 'undefined' && artisans[i].images[j].status !== false) { %>
+    <img src="<%= artisans[i].images[j].url.substring(6) %>" alt="Avatar" style="width:350px; height: 350px;padding:10px 20px" >
+    <form action="/api/artisans/changeverificationimages" method="post">
+      <input type= "hidden" name="_id" value="<%= artisans[i].images[j]._id%>" />
+      <input type= "hidden" name="username" value="<%= artisans[i].username%>" />
+      <button style="position:relative;left:14%;" type="submit" value="Add">Approve</button>
+    </form>
+    <hr style="position:relative;left:-33%;">
+
+    <% } %>
+  <% } %>
+<% } %>
+  </div>
+    <div class="footer">
+        <span><h2>@PROTSAHAN</h2></span>
+    </div>
+</body>
+</html>

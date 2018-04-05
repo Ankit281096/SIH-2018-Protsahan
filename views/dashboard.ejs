@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"
+    integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ"
+    crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <!-- <link href="style.css" rel="stylesheet"> -->
+    <title>Protsahan | Dashboard</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+
+    <style>
+     body{
+        margin: 0;
+        padding:0;
+        font-family: "Lato",sans-serif;
+        background: #f1f1f1;
+        height: 100vh;
+    }
+
+    .header-main{
+    width: 100%;
+    height:10vh;
+}
+
+nav {
+    width :100%;
+    height:80px;
+    background-color:rgba(0, 0, 0,0.850);
+    line-height: 50px;
+    position: fixed;
+    z-index: 100;
+
+}
+
+nav ul {
+    float:right;
+    margin-right: 30px;
+}
+nav ul li {
+    list-style-type: none;
+    display: inline-block;
+    transition: 0.8s all;
+}
+nav ul li:hover{
+    background-color: #29a719;
+
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding:30px;
+    color:white;
+}
+
+.fas fa-bell fa-lg:hover{
+    padding-right: 10px;
+}
+
+
+
+.sidebar{
+    margin-top: 15px;
+    width:250px;
+    height:485px;
+    background-color:#DDDDDD;
+
+}
+.sidebar ul{
+    padding: 0;
+    margin: 0;
+
+
+}
+.sidebar ul li{
+    margin: 0;
+    list-style-type: none;
+    display: block;
+    transition: 0.8s all;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(65, 63, 63);
+
+}
+.sidebar ul li:hover{
+    background-color: #BFBFBF;
+    cursor: pointer;
+}
+.sidebar ul li h2{
+    margin: 0;
+    padding:20px 10px;
+    color: black;
+    font-size:25px;
+}
+.sidebar ul li a {
+    text-decoration: none;
+    color:black;
+    padding:18px 0;
+    font-size: 22px;
+}
+.artisan {
+    height: 50px;
+    background-color: #DDDDDD;
+    text-align: center;
+    width: 1000px;
+    position: relative;
+    left:22%;
+    top:-480px;
+    border-radius: 5px;
+
+}
+.artisan h2 {
+    padding: 10px;
+}
+.footer {
+  position: absolute;
+  top:89%;
+    height:70px;
+    width:100%;
+    background-color: rgba(0, 0, 0,0.899);
+    color: white;
+    text-align: center;
+
+}
+.footer h2 {
+
+}
+</style>
+</head>
+<body>
+    <div class="header-main">
+        <nav>
+            <img src="images/logo.png" width="200" height="80">
+            <ul>
+                <li><a href="/allnotifications"><i class="fas fa-bell fa-lg" style="color:white; cursor:pointer; padding-right:5px;"  aria-hidden="true"></i>Notifications</a></li>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li><i class="fas fa-user fa-2x"></i><span style="padding-left:5px;text-transform:uppercase;font-size:32px;">&nbsp;<strong><%= req.session.user[0].username %></strong></span></li>
+            <li><i class="fas fa-users fa-1x"></i>&nbsp;<a style="padding-left:5px" href="/dashboard/artisans">State Artisans</a></li>
+            <li><i class="fas fa-list-alt fa-1x"></i><a style="padding-left:5px" href="/dashboard/artisans/all">All Artisans</a></li>
+            <li><i class="fas fa-plus fa-1x"></i><a style="padding-left:15px" href="/scheme">Add Scheme</a></li>
+            <li><i class="fas fa-question-circle fa-1x"></i><a style="padding-left:10px" href="/dashboard/artisans/qalist">Q & A Section</a></li>
+            <li><i class="fas fa-wrench fa-1x"></i><a style="padding-left:5px" href="/employeelogin/verification">Verification</a></li>
+            <li><i class="fas fa-info fa-1x"></i><a style="padding-left:20px" href="/livesession">Live Session</a></li>
+        </ul>
+
+    </div>
+
+        <script>
+         window.onload = function(){
+           fetch('/dashboard/getcount',{
+           method:'get'})
+           .then(result => {
+             console.log(result);
+           })
+           .catch(e =>{
+             console.log(e);
+           });
+         }
+        </script>
+    <div class="artisan">
+        <h2>No of Artisans Registered:15</h2>
+    </div>
+
+        <div id="myfirstchart" style="height: 250px;width:500px; left:25%;top:-400px;"></div>
+
+
+    <div id="donut-example" style=" position :relative; height: 250px;width:500px; left:60%;top:-650px;"></div>
+    <script>
+        new Morris.Donut({
+        element: 'donut-example',
+        data: [
+          {label: "Pottery", value: 10},
+          {label: "Weaving", value: 12},
+          {label: "Handcraft", value: 20}
+        ]
+      });
+    </script>
+
+    <script>
+        new Morris.Line({
+  // ID of the element in which to draw the chart.
+  element: 'myfirstchart',
+  // Chart data records -- each entry in this array corresponds to a point on
+  // the chart.
+  data: [
+    { year: '2008', value: 20 },
+    { year: '2009', value: 10 },
+    { year: '2010', value: 5 },
+    { year: '2011', value: 5 },
+    { year: '2012', value: 20 }
+  ],
+  // The name of the data record attribute that contains x-values.
+  xkey: 'year',
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['value'],
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  labels: ['Value']
+});
+    </script>
+
+
+    <div class="footer">
+        <span><h2>@PROTSAHAN</h2></span>
+    </div>
+
+</body>
